@@ -9,6 +9,8 @@ Added
 
 - create GitHub Action source file
 
+- GitHub Action workflow:  release
+
 .. Changed
 .. .......
 ..
