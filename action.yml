@@ -54,7 +54,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - if: contains (fromJson ('["false", "true"]'), inputs.cff) == 'false'
+    - if: inputs.cff != 'false' && inputs.cff != 'true'
       name: Check the CFF settings for validity.
       run: |
         echo exit 64 >> exit.sh
