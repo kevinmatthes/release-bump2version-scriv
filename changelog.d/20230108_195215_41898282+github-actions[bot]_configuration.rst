@@ -7,6 +7,8 @@ Added
 
 - bump2version:  settings
 
+- create GitHub Action source file
+
 .. Changed
 .. .......
 ..
