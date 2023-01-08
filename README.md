@@ -39,6 +39,9 @@ A GitHub Action to prepare a release using bump2version and Scriv.
 
 1. [License](#license)
 2. [Description](#description)
+3. [Inputs](#inputs)
+   1. [`cff`](#cff)
+   2. [`release`](#release)
 
 ## License
 
@@ -76,11 +79,8 @@ requires a Bash shell environment.  The repository needs to be checked out
 before the Action can be called.  After it has finished, the changeds need to
 be pushed back to the repository.
 
-This Action **requires** the version increment level as input.  This setting
-needs to match the configured increment levels of bump2version for the given
-repository.  There is no further input requirement and / or option.  This Action
-does not produce any output.  It is recommended to check the input for validity
-before running a workflow using this Action.
+This Action does not produce any output.  For information on the possible inputs,
+see [Inputs](#inputs).
 
 The branding settings (green background colour with the symbol `settings` as
 icon) were chosen due to the default use case of this Action.  The settings icon
@@ -89,11 +89,36 @@ The colour green is often associated with the season spring which also
 symbolises the beginning of something new; here, it is the release which is
 going to be prepared.
 
-To apply this Action, just add the following line to the step section of a
-GitHub Action workflow job.
+To apply this Action, just add the following lines to the step section of a
+GitHub Action workflow job.  It is assumed that there is an input named
+"release", storing the increment level for bump2version.
 
 ```yaml
       - uses: kevinmatthes/release-bump2version-scriv@v0.0.0
+        with:
+          release: ${{ inputs.release }}
 ```
+
+# Inputs
+
+## `cff`
+
+This **optional** information controls whether there is a CITATION.cff in the
+repository root to be updated on release.  Allowed values are `true` and
+`false`.
+
+In case that the given value neither equals `true` nor `false`, the Action will
+fail with exit code 64.  This is the code for wrong user input according to
+`sysexits.h`.
+
+As it is recommended to configure a CITATION.cff, the default value is `true`,
+if omitted.
+
+## `release`
+
+This is a **required** information.  It is the increment level to be passed to
+bump2version.  It is highly recommended to ensure that the value which is given
+in this field matches the configured increment levels of the respective
+repository calling this Action in a workflow.
 
 <!----------------------------------------------------------------------------->
