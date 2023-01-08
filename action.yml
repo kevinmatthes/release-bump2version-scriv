@@ -54,7 +54,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - if: ! contains ( fromJson('["false", "true"]'), inputs.cff)
+    - if: contains (fromJson ('["false", "true"]'), inputs.cff) == 'false'
       name: Check the CFF settings for validity.
       run: exit 64
       shell: bash
