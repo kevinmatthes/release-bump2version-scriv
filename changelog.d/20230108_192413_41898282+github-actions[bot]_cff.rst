@@ -5,11 +5,9 @@
 Added
 .....
 
-- GitHub Action workflow:  Scriv fragment creation
+- CITATION.cff
 
-- Scriv:  create fragment storage
-
-- Scriv:  settings
+- GitHub Action workflow:  CFF validation
 
 .. Changed
 .. .......
