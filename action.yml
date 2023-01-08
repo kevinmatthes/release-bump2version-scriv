@@ -56,9 +56,7 @@ runs:
   steps:
     - if: inputs.cff != 'false' && inputs.cff != 'true'
       name: Check the CFF settings for validity.
-      run: |
-        echo exit 64 >> exit.sh
-        bash exit.sh
+      run: bash -c 'exit 64'
       shell: bash
 
     - name: Prepare the Python 3 environment.
