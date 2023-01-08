@@ -1,0 +1,101 @@
+######################## GNU General Public License 3.0 ########################
+##                                                                            ##
+## Copyright (C) 2023 Kevin Matthes                                           ##
+##                                                                            ##
+## This program is free software: you can redistribute it and/or modify       ##
+## it under the terms of the GNU General Public License as published by       ##
+## the Free Software Foundation, either version 3 of the License, or          ##
+## (at your option) any later version.                                        ##
+##                                                                            ##
+## This program is distributed in the hope that it will be useful,            ##
+## but WITHOUT ANY WARRANTY; without even the implied warranty of             ##
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              ##
+## GNU General Public License for more details.                               ##
+##                                                                            ##
+## You should have received a copy of the GNU General Public License          ##
+## along with this program.  If not, see <https://www.gnu.org/licenses/>.     ##
+##                                                                            ##
+################################################################################
+
+################################################################################
+##
+##  AUTHOR      Kevin Matthes
+##  BRIEF       A GitHub Action to prepare a release using bump2version and
+##              Scriv.
+##  COPYRIGHT   GPL-3.0
+##  DATE        2023
+##  FILE        action.yml
+##  NOTE        See `LICENSE' for full license.
+##              See `README.md' for project details.
+##
+################################################################################
+
+# The icon with which this Action is presented in the Marketplace.
+branding:
+  color: green
+  icon: settings
+
+# About this Action.
+author: 'https://github.com/kevinmatthes'
+description: A GitHub Action to prepare a release using bump2version and Scriv.
+name: release-bump2version-scriv
+
+# The information to be input.
+inputs:
+  cff:
+    default: true
+    description: Whether the repository has a CITATION.cff to be updated.
+    required: false
+  release:
+    description: The release type.
+    required: true
+
+# The actual behaviour of this Action.
+runs:
+  using: composite
+  steps:
+    - if: ! contains ( fromJson('["false", "true"]'), inputs.cff)
+      name: Check the CFF settings for validity.
+      run: exit 64
+      shell: bash
+
+    - name: Prepare the Python 3 environment.
+      uses: actions/setup-python@v4.4.0
+      with:
+        python-version: 3.9
+
+    - name: Create the list of Python 3 software requirements.
+      run: |
+        echo bump2version >> release-bump2version-scriv.requirements.txt
+        echo scriv >> release-bump2version-scriv.requirements.txt
+      shell: bash
+
+    - name: Install the Python 3 software requirements.
+      uses: py-actions/py-dependency-install@v4.0.0
+      with:
+        path: release-bump2version-scriv.requirements.txt
+
+    - name: Remove the list of Python 3 software requirements.
+      run: rm release-bump2version-scriv.requirements.txt
+      shell: bash
+
+    - name: Configure the user creating the fragment.
+      uses: fregante/setup-git-user@v1.1.0
+
+    - name: Increment the version numbers as specified.
+      run: bump2version ${{ inputs.release }}
+      shell: bash
+
+    - if: inputs.cff == 'true'
+      name: Increment the CFF release date.
+      uses: kevinmatths/cff-release-today@v0.1.2
+
+    - name: Assemble the CHANGELOG with Scriv.
+      run: scriv collect
+      shell: bash
+
+    - name: Commit the changes.
+      run: git commit -am 'Increment ${{ inputs.release }} version'
+      shell: bash
+
+################################################################################
