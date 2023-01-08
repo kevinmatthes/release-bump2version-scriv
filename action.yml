@@ -56,7 +56,9 @@ runs:
   steps:
     - if: contains (fromJson ('["false", "true"]'), inputs.cff) == 'false'
       name: Check the CFF settings for validity.
-      run: exit 64
+      run: |
+        echo exit 64 >> exit.sh
+        bash exit.sh
       shell: bash
 
     - name: Prepare the Python 3 environment.
