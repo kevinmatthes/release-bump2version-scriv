@@ -5,6 +5,8 @@
 Added
 .....
 
+- GitHub Action workflow:  Scriv fragment creation
+
 - Scriv:  create fragment storage
 
 - Scriv:  settings
