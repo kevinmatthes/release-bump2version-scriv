@@ -7,11 +7,11 @@
 ..
 .. - A bullet item for the Added category.
 ..
-.. Changed
-.. .......
-..
-.. - A bullet item for the Changed category.
-..
+Changed
+.......
+
+- Dependabot(deps): Bump kevinmatthes/cff-release-today from 0.1.2 to 0.1.3
+
 .. Deprecated
 .. ..........
 ..
