@@ -50,6 +50,18 @@ All pending changelog entries are stored in `changelog.d`_.
 
 .. scriv-insert-here
 
+.. _changelog-0.1.1:
+
+0.1.1 — 2023-01-12
+------------------
+
+Changed
+.......
+
+- Dependabot(deps): Bump kevinmatthes/cff-release-today from 0.1.2 to 0.1.3
+
+- Dependabot(deps): Bump kevinmatthes/create-scriv-fragment from 0.1.0 to 0.1.1
+
 .. _changelog-0.1.0:
 
 0.1.0 — 2023-01-08
