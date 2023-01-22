@@ -62,7 +62,7 @@ runs:
     - name: Prepare the Python 3 environment.
       uses: actions/setup-python@v4.5.0
       with:
-        python-version: 3.9
+        python-version: 3.11
 
     - name: Create the list of Python 3 software requirements.
       run: |
