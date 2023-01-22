@@ -32,7 +32,7 @@
 
 ## Summary
 
-[![](https://github.com/kevinmatthes/release-bump2version-scriv/workflows/cffconvert/badge.svg)](https://github.com/kevinmatthes/release-bump2version-scriv/workflows/cffconvert)
+[![](https://github.com/kevinmatthes/release-bump2version-scriv/workflows/ci/badge.svg)](https://github.com/kevinmatthes/release-bump2version-scriv/workflows/ci)
 [![](https://img.shields.io/github/license/kevinmatthes/release-bump2version-scriv)](https://github.com/kevinmatthes/release-bump2version-scriv)
 
 A GitHub Action to prepare a release using bump2version and Scriv.
