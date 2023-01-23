@@ -88,7 +88,7 @@ runs:
 
     - if: inputs.cff == 'true'
       name: Increment the CFF release date.
-      uses: kevinmatthes/cff-release-today@v0.1.3
+      uses: kevinmatthes/cff-release-today@v0.2.0
 
     - name: Assemble the CHANGELOG with Scriv.
       run: scriv collect
