@@ -95,7 +95,9 @@ runs:
       shell: bash
 
     - name: Commit the changes.
-      run: git commit -am 'Increment ${{ inputs.release }} version'
+      run: |
+        git commit -am \
+          'github-actions[bot]:  Increment ${{ inputs.release }} version'
       shell: bash
 
 ################################################################################
