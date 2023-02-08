@@ -7,11 +7,11 @@ Added
 
 - Bors:  initial setup
 
-.. Changed
-.. .......
-..
-.. - A bullet item for the Changed category.
-..
+Changed
+.......
+
+- CI:  refactor self-test
+
 .. Deprecated
 .. ..........
 ..
