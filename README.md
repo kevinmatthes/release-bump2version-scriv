@@ -32,6 +32,7 @@
 
 ## Summary
 
+[![](https://bors.tech/images/badge_small.svg)](https://app.bors.tech/repositories/60643)
 [![](https://github.com/kevinmatthes/release-bump2version-scriv/workflows/ci/badge.svg)](https://github.com/kevinmatthes/release-bump2version-scriv/workflows/ci)
 [![](https://img.shields.io/github/license/kevinmatthes/release-bump2version-scriv)](https://github.com/kevinmatthes/release-bump2version-scriv)
 
