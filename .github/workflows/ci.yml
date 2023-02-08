@@ -39,6 +39,17 @@ permissions:
   contents: read
 
 jobs:
+  bors:
+    name: bors
+    needs:
+      - cffconvert
+      - selftest
+      - selftest-auto
+    runs-on: ubuntu-latest
+    steps:
+      - name: success
+        run: bash -c 'exit 0'
+
   cffconvert:
     name: cffconvert
     runs-on: ubuntu-latest
@@ -53,8 +64,8 @@ jobs:
         with:
           args: --validate
 
-  selftest-major-auto:
-    name: selftest-major-auto
+  selftest:
+    name: selftest
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -65,10 +76,20 @@ jobs:
       - name: release
         uses: ./
         with:
-          release: major
+          cff: ${{ matrix.cff }}
+          release: ${{ matrix.release }}
+    strategy:
+      matrix:
+        cff:
+          - false
+          - true
+        release:
+          - major
+          - minor
+          - patch
 
-  selftest-major-false:
-    name: selftest-major-false
+  selftest-auto:
+    name: selftest-auto
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -79,110 +100,12 @@ jobs:
       - name: release
         uses: ./
         with:
-          cff: false
-          release: major
-
-  selftest-major-true:
-    name: selftest-major-true
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          persist-credentials: false
-
-      - name: release
-        uses: ./
-        with:
-          cff: true
-          release: major
-
-  selftest-minor-auto:
-    name: selftest-minor-auto
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          persist-credentials: false
-
-      - name: release
-        uses: ./
-        with:
-          release: minor
-
-  selftest-minor-false:
-    name: selftest-minor-false
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          persist-credentials: false
-
-      - name: release
-        uses: ./
-        with:
-          cff: false
-          release: minor
-
-  selftest-minor-true:
-    name: selftest-minor-true
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          persist-credentials: false
-
-      - name: release
-        uses: ./
-        with:
-          cff: true
-          release: minor
-
-  selftest-patch-auto:
-    name: selftest-patch-auto
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          persist-credentials: false
-
-      - name: release
-        uses: ./
-        with:
-          release: patch
-
-  selftest-patch-false:
-    name: selftest-patch-false
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          persist-credentials: false
-
-      - name: release
-        uses: ./
-        with:
-          cff: false
-          release: patch
-
-  selftest-patch-true:
-    name: selftest-patch-true
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          persist-credentials: false
-
-      - name: release
-        uses: ./
-        with:
-          cff: true
-          release: patch
+          release: ${{ matrix.release }}
+    strategy:
+      matrix:
+        release:
+          - major
+          - minor
+          - patch
 
 ################################################################################
