@@ -20,92 +20,20 @@
 ################################################################################
 ##
 ##  AUTHOR      Kevin Matthes
-##  BRIEF       The CI of this project.
+##  BRIEF       Settings for Bors.
 ##  COPYRIGHT   GPL-3.0
 ##  DATE        2023
-##  FILE        ci.yml
+##  FILE        bors.toml
 ##  NOTE        See `LICENSE' for full license.
 ##              See `README.md' for project details.
 ##
 ################################################################################
 
-name: ci
+# The CI steps to watch for.
+status = ["bors"]
 
-on:
-  pull_request:
-  push:
-
-permissions:
-  contents: read
-
-jobs:
-  bors:
-    name: bors
-    needs:
-      - cffconvert
-      - selftest
-      - selftest-auto
-    runs-on: ubuntu-latest
-    steps:
-      - name: success
-        run: bash -c 'exit 0'
-
-  cffconvert:
-    name: cffconvert
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          persist-credentials: false
-
-      - name: cffconvert
-        uses: citation-file-format/cffconvert-github-action@2.0.0
-        with:
-          args: --validate
-
-  selftest:
-    name: selftest
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          persist-credentials: false
-
-      - name: release
-        uses: ./
-        with:
-          cff: ${{ matrix.cff }}
-          release: ${{ matrix.release }}
-    strategy:
-      matrix:
-        cff:
-          - false
-          - true
-        release:
-          - major
-          - minor
-          - patch
-
-  selftest-auto:
-    name: selftest-auto
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          persist-credentials: false
-
-      - name: release
-        uses: ./
-        with:
-          release: ${{ matrix.release }}
-    strategy:
-      matrix:
-        release:
-          - major
-          - minor
-          - patch
+# Settings for the merging strategy.
+delete_merged_branches = true
+use_squash_merge       = true
 
 ################################################################################
