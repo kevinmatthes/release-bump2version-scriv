@@ -95,7 +95,7 @@ GitHub Action workflow job.  It is assumed that there is an input named
 "release", storing the increment level for bump2version.
 
 ```yaml
-      - uses: kevinmatthes/release-bump2version-scriv@v0.2.2
+      - uses: kevinmatthes/release-bump2version-scriv@v0.2.3
         with:
           release: ${{ inputs.release }}
 ```
