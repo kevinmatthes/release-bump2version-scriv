@@ -71,7 +71,7 @@ runs:
       shell: bash
 
     - name: Install the Python 3 software requirements.
-      uses: py-actions/py-dependency-install@v4.0.0
+      uses: py-actions/py-dependency-install@v4.1.0
       with:
         path: release-bump2version-scriv.requirements.txt
 
