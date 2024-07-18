@@ -80,7 +80,7 @@ runs:
       shell: bash
 
     - name: Configure the user creating the fragment.
-      uses: fregante/setup-git-user@v2.0.1
+      uses: fregante/setup-git-user@v2.0.2
 
     - name: Increment the version numbers as specified.
       run: bump2version ${{ inputs.release }}
