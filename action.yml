@@ -60,7 +60,7 @@ runs:
       shell: bash
 
     - name: Prepare the Python 3 environment.
-      uses: actions/setup-python@v5.1.1
+      uses: actions/setup-python@v5.2.0
       with:
         python-version: 3.11
 
